@@ -1,7 +1,7 @@
 version: '3.6'
 
 services:
-  db-service:
+  db:
     image: mysql:5.7
     hostname: mysql
     ports:
@@ -15,16 +15,6 @@ services:
     ports:
       - 80:80
     depends_on:
-      - db-service
+      - db
     volumes:
-      - /home/ryan/workspace/sagacity:/var/www/html
-      
-  sagacity2-dev:
-    build: ./sagacity2
-    hostname: sagacity2
-    ports:
-      - 8000:80
-    depends_on:
-      - db-service
-    volumes:
-      - /home/ryan/workspace/sagacity2:/var/www/html
+      - ./sagacity:/var/www/html
