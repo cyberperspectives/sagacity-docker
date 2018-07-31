@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  db-service:
+    image: mysql:5.7
+    hostname: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      
+  sagacity-dev:
+    build: ./sagacity
+    hostname: sagacity-dev
+    ports:
+      - 80:80
+    depends_on:
+      - db-service
+    volumes:
+      - /home/ryan/workspace/sagacity:/var/www/html
+      
+  sagacity2-dev:
+    build: ./sagacity2
+    hostname: sagacity2
+    ports:
+      - 8000:80
+    depends_on:
+      - db-service
+    volumes:
+      - /home/ryan/workspace/sagacity2:/var/www/html
